@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events,MenuController } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { FacebookLoginResponse } from '@ionic-native/facebook';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -31,7 +31,7 @@ export class LoginPage {
   baseUrl:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public keyboard: Keyboard,public fb: Facebook,private storage: Storage,private http:Http,
-    private event : Events) {
+    private event : Events,public menuCtrl: MenuController) {
       this.baseUrl = 'http://localhost/sf/login.php';
   }
 
@@ -113,6 +113,12 @@ export class LoginPage {
         });
     });
     //this.navCtrl.push(IndexPage,{ username : this.username, password : this.password});
+  }
+
+  enableAuthenticatedMenu() {
+    console.log("inside enableAuthenticatedMenu")
+    this.menuCtrl.enable(true, 'authenticated');
+    this.menuCtrl.enable(false, 'unauthenticated');
   }
 
 }

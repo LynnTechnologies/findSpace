@@ -11,7 +11,7 @@
     <ion-card >
       
         <ion-card-content style="position: relative;">
-            <form (ngSubmit)="login()" >
+            <form (ngSubmit)="enableAuthenticatedMenu()" >
             <ion-list>
               <ion-item>
                 <ion-input type="text" [(ngModel)]="username"  [ngModelOptions]="{standalone: true}" placeholder="Username"></ion-input>

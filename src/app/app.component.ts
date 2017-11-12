@@ -18,17 +18,24 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  authenticatedPages: Array<{title: string, component: any}>;
+  unauthenticatedPages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
     public modalCtrl: ModalController,private storage: Storage, private events : Events) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
+    this.unauthenticatedPages = [
       { title: 'Home', component: HomePage },
       { title: 'Map', component: MapPage },
       { title: 'Login', component: LoginPage }
+    ];
+
+    this.authenticatedPages = [
+      { title: 'Home', component: HomePage },
+      { title: 'Map', component: MapPage },
+      { title: 'Logout', component: LoginPage }
     ];
       
   }
