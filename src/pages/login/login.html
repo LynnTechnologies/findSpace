@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="background" >
+  
+    <ion-card >
+      
+        <ion-card-content style="position: relative;">
+            <form (ngSubmit)="login()" >
+            <ion-list>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="username"  [ngModelOptions]="{standalone: true}" placeholder="Username"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input type="password" [(ngModel)]="password"  [ngModelOptions]="{standalone: true}"  placeholder="Password"></ion-input>
+              </ion-item>
+            </ion-list>
+              <button ion-button  color="secondary" type="submit" block>
+                Login
+              </button>
+            </form>
+            <a>Forget password ? </a><br>
+            OR
+            <button ion-button block color="facebook" (click)="fbLogin()">
+              <ion-icon name="logo-facebook" ></ion-icon>
+              Login with facebook
+            </button>
+          </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="userData">
+      <ion-card-header>{{ userData.username }}</ion-card-header>
+      <img [src]="userData.picture" />
+      <ion-card-content>
+        <p>Email: {{ userData.email }}</p>
+        <p>First Name: {{ userData.first_name }}</p>
+      </ion-card-content>
+      </ion-card>
+    
+      <button class="bottom" no-bounce fixed-content  ion-button clear full color="light"> Don't have an account? SignUp </button>
+    </ion-content>
+  
+  
+  

@@ -1,0 +1,72 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-advanced-http": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "1154795664621154",
+            "APP_NAME": "findspace",
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-firebase": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "cordova-plugin-buildinfo": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "cordova-universal-links-plugin": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "cordova-plugin-browsertab": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "com-sarriaroman-photoviewer": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.gp.spaceFinder"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        }
+    }
+}

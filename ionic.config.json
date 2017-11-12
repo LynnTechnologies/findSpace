@@ -1,0 +1,8 @@
+{
+  "name": "findSpace",
+  "app_id": "39aa187c",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

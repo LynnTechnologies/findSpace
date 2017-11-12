@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="margin-left: 10%">
+      <img src="assets/images/Spacefinder-logo.png" alt="" height="40px" style="align-items: center">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content page-home class="background">
+    <ion-card class="margin:10px">
+       <h1 class="title-head">FIND SPACES IN SEATTLE</h1>
+       <h3 style="color:#7D7A7A"> <span class="rule"></span>I AM LOOKING FOR A<span class="rule"></span></h3>
+       <ion-label>SPACE FOR:</ion-label>
+       <form (ngSubmit)="searchSpace()" >
+       <ion-list>
+       <ion-item >
+         <ion-select style="margin-right:5px; margin-left:5px; width: 100%;border-radius: 5px;
+          border: 1px solid #C8C3C3" placeholder="Space For" [(ngModel)]="userData.selectedSpace" [ngModelOptions]="{standalone: true}">
+           <ion-option *ngFor="let item of spaceFor" [value]="item">{{item}}</ion-option>
+         </ion-select>
+       </ion-item>
+       <ion-label>RENT BY:</ion-label>
+       <ion-item>
+           <ion-select style="margin-right:5px; margin-left:5px; width: 100%;border-radius: 5px;
+           border: 1px solid #C8C3C3" placeholder="Rent By" [(ngModel)]="userData.rentBy" [ngModelOptions]="{standalone: true}">
+            <ion-option *ngFor="let item of string" [value]="item">{{item}}</ion-option>
+          </ion-select>
+       </ion-item>
+     <ion-item>
+         <button ion-button style="height:40px" color="secondary" type="submit" block>
+             <h2  style="color:white"><b>Find Space</b></h2>
+         </button>
+     </ion-item>
+       
+       </ion-list>
+       </form>
+     </ion-card>
+   </ion-content>
+   

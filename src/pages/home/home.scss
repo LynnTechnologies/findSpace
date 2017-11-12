@@ -1,0 +1,89 @@
+page-home {
+    .background {
+      background-image: url('../assets/images/back.jpg');
+    }
+
+    .scroll-content {
+      align-content: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+  
+    ion-card.card {
+      box-shadow: none;
+      background: #fff;
+      border-radius: 5px; 
+    }
+  
+    ion-card-header.card-header {
+      color: #fff;
+    }
+  
+    .list > .item-block:first-child {
+        border : medium none;
+    }
+  
+    .item {
+        margin-bottom: 10px;
+        .text-input, {
+          color: #fff;
+        }
+  
+    }
+  
+    .icon {
+      padding-right: 10px;
+    }
+  
+    .bottom {
+      position: absolute;
+      bottom: 0px;
+    }
+
+    //this works for select alert popup
+.alert-wrapper {
+    min-width: 40px;//what ever you like
+ }
+ 
+ .alert-radio-label {
+    white-space: normal!important;
+ }
+
+ .select{
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  .ion-card-select {
+    margin-right:5px; 
+    margin-left:5px; 
+    width: 95%;
+    border-radius: 5px; 
+    border: 'solid 1px' ;
+    border-color: #C8C3C3;
+  }
+  
+  .rule {
+    display: inline-block;
+    border: 1px solid #888;
+    margin: 0px 8px;
+    position: relative;
+    top: -5px;
+    width: 40px;
+    //margin: 0px 15px
+  }
+
+  .title-head {
+    font-family: 'Oswald',"Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 5px;
+    margin: 0px auto;
+    padding: 30px 20px 20px 20px;
+  }
+
+}
+
