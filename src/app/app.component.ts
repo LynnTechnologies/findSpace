@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,ModalController, Events } from 'ionic-angular';
+import { Nav, Platform,ModalController, Events, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -22,20 +22,24 @@ export class MyApp {
   unauthenticatedPages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-    public modalCtrl: ModalController,private storage: Storage, private events : Events) {
+    public modalCtrl: ModalController,private storage: Storage, private events : Events,
+  private menuCtrl : MenuController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.unauthenticatedPages = [
       { title: 'Home', component: HomePage },
-      { title: 'Map', component: MapPage },
+      { title: 'Map', component: " " },
       { title: 'Login', component: LoginPage }
     ];
 
     this.authenticatedPages = [
       { title: 'Home', component: HomePage },
-      { title: 'Map', component: MapPage },
-      { title: 'Logout', component: LoginPage }
+      { title: 'Map', component: " " },
+      { title: 'Referals', component: " " },
+      { title: 'Rewards', component: " " },
+      { title: 'My Account', component: " " },
+      { title: 'Logout', component: null }
     ];
       
   }
@@ -54,6 +58,15 @@ export class MyApp {
   openPage(page) { 
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.component == " ") {
+     
+    } else if (page.component) {
+      this.nav.setRoot(page.component);
+    } else {
+      this.storage.clear();
+      this.menuCtrl.enable(false, 'authenticated');
+      this.menuCtrl.enable(true, 'unauthenticated');
+      this.nav.setRoot(HomePage);
+    }
   }
 }

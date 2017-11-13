@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events,MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events,MenuController,AlertController  } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { FacebookLoginResponse } from '@ionic-native/facebook';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ListPage } from '../list/list';
+import { HomePage } from '../home/home';
 //import { Firebase } from '@ionic-native/firebase'
 //import { AngularFireAuth } from 'angularfire2/auth';
 //import * as firebase from 'firebase/app';
@@ -31,8 +32,8 @@ export class LoginPage {
   baseUrl:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public keyboard: Keyboard,public fb: Facebook,private storage: Storage,private http:Http,
-    private event : Events,public menuCtrl: MenuController) {
-      this.baseUrl = 'http://localhost/sf/login.php';
+    private event : Events,public menuCtrl: MenuController,private alertCtrl : AlertController) {
+      this.baseUrl = 'http://gateforyou.16mb.com/login.php';
   }
 
   // getUser():firebase.User {
@@ -65,8 +66,10 @@ export class LoginPage {
           this.storage.set('name', profile['first_name']);
           this.storage.set('email', profile['email']);
           this.storage.set('pic', profile['picture_large']['data']['url']);
-          this.event.publish("user:loggedin",profile['first_name'])//-------
+          this.event.publish("user:loggedin",profile['first_name'])//------
+          this.enableAuthenticatedMenu();
           this.navCtrl.push(ListPage,{userData : this.userData});
+          //this.navCtrl.setRoot(HomePage);
         });
       });
 
@@ -89,6 +92,14 @@ export class LoginPage {
   username : any;
   password : any;
   login() {
+    if (this.username == null || this.password == null) {
+      let alert = this.alertCtrl.create({
+        title: 'Invalid',
+        subTitle: 'Please enter both username and password!',
+        buttons: ['Ok']
+      });
+      alert.present();
+    } else {
    let data = {username: this.username, pass : this.password};
     new Promise((resolve,reject) => {
       let headers = new Headers({
@@ -104,19 +115,35 @@ export class LoginPage {
       this.http.post(this.baseUrl,req,options).subscribe(res => {
         
         let response = res.json();
-        this.storage.set('name', response.name);
-        this.storage.set('email', response.email);
-        this.storage.set('pic', response.pic);
-        
-        }, error => {
-          console.log("Oooops!");
+        console.log("response: " +response);
+         if (response == null ) {
+          let alert = this.alertCtrl.create({
+            title: 'Invalid',
+            subTitle: 'Please make sure your username and password is correct!',
+            buttons: ['Ok']
+          });
+          alert.present();
+         } else {
+          this.storage.set('name', response[0].name);
+          this.storage.set('email', response[0].email);
+          this.storage.set('pic', response[0].pic);
+          this.enableAuthenticatedMenu();
+          this.navCtrl.setRoot(HomePage);
+         }
+       }, error => {
+          let alert = this.alertCtrl.create({
+            title: 'Oops! Something went wrong please try again later',
+            buttons: ['Ok']
+          });
+          alert.present();
         });
     });
+    
+    }
     //this.navCtrl.push(IndexPage,{ username : this.username, password : this.password});
   }
 
   enableAuthenticatedMenu() {
-    console.log("inside enableAuthenticatedMenu")
     this.menuCtrl.enable(true, 'authenticated');
     this.menuCtrl.enable(false, 'unauthenticated');
   }
