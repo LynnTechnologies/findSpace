@@ -33,14 +33,22 @@ export class MyApp {
       { title: 'Login', component: LoginPage }
     ];
 
-    this.authenticatedPages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Map', component: " " },
-      { title: 'Referals', component: " " },
-      { title: 'Rewards', component: " " },
-      { title: 'My Account', component: " " },
-      { title: 'Logout', component: null }
-    ];
+    
+
+    events.subscribe('user:logged', (user, time) => {
+      console.log('Welcome', user, 'at', time);
+      this.authenticatedPages = [
+        { title: 'Home', component: HomePage },
+        { title: 'Map', component: " " },
+        { title: 'Referals', component: " " },
+        { title: 'Rewards', component: " " },
+        { title: 'My Account', component: " " },
+        
+      ];
+      this.authenticatedPages.push({title: user, component: " "});
+
+      this.authenticatedPages.push({ title: 'Logout', component: null });
+    });
       
   }
 

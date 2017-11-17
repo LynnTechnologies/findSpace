@@ -127,6 +127,7 @@ export class LoginPage {
           this.storage.set('name', response[0].name);
           this.storage.set('email', response[0].email);
           this.storage.set('pic', response[0].pic);
+          this.event.publish('user:logged', response[0].email, Date.now());
           this.enableAuthenticatedMenu();
           this.navCtrl.setRoot(HomePage);
          }
