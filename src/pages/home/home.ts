@@ -58,8 +58,7 @@ export class HomePage {
 
     searchSpace() {
       const loading = this.loadingController.create({
-       content: `
-       <ion-spinner name="bubbles"></ion-spinner>  Please wait...`
+       spinner :'dots'
       });
       loading.present();
 
