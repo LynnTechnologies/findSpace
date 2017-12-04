@@ -20,7 +20,7 @@ export class MyApp {
 
   authenticatedPages: Array<{title: string, component: any}>;
   unauthenticatedPages: Array<{title: string, component: any}>;
-
+  authenticatedOwner : Array<{title: string, component: any}>;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
     public modalCtrl: ModalController,private storage: Storage, private events : Events,
   private menuCtrl : MenuController) {
@@ -30,24 +30,40 @@ export class MyApp {
     this.unauthenticatedPages = [
       { title: 'Home', component: HomePage },
       { title: 'Map', component: " " },
+      { title: 'List a space', component: 'SignupPage' },
       { title: 'Login', component: LoginPage }
     ];
 
-    
+    this.authenticatedOwner = [
+      { title: 'Home', component: HomePage },
+      { title: 'Add Space', component: " " },
+      { title: 'View Space', component: " " },
+      { title: 'Bookings', component: " " },
+      { title: 'Earings', component: " " },
+      { title: 'My Account', component: " " },
+      
+    ];
+
+    this.authenticatedPages = [
+      { title: 'Home', component: HomePage },
+      { title: 'Map', component: " " },
+      { title: 'Referals', component: " " },
+      { title: 'Rewards', component: " " },
+      { title: 'My Account', component: " " },
+      
+    ];
 
     events.subscribe('user:logged', (user, time) => {
       console.log('Welcome', user, 'at', time);
-      this.authenticatedPages = [
-        { title: 'Home', component: HomePage },
-        { title: 'Map', component: " " },
-        { title: 'Referals', component: " " },
-        { title: 'Rewards', component: " " },
-        { title: 'My Account', component: " " },
-        
-      ];
-      this.authenticatedPages.push({title: user, component: " "});
-
-      this.authenticatedPages.push({ title: 'Logout', component: null });
+     
+      if(user.accType == "SO"){
+        this.authenticatedOwner.push({title: user.email, component: " "});
+        this.authenticatedOwner.push({ title: 'Logout', component: null });
+      } else {
+        this.authenticatedPages.push({title: user.email, component: " "});
+        this.authenticatedPages.push({ title: 'Logout', component: null });
+      }
+     
     });
       
   }
@@ -74,6 +90,7 @@ export class MyApp {
       this.storage.clear();
       this.menuCtrl.enable(false, 'authenticated');
       this.menuCtrl.enable(true, 'unauthenticated');
+      this.menuCtrl.enable(false, 'authenticatedOwner');
       this.nav.setRoot(HomePage);
     }
   }

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add Space</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="background" >
+  
+    <ion-card >
+      
+        <ion-card-content style="position: relative;">
+            <form (ngSubmit)="createSpace()" >
+            <ion-list>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="propertyName"  [ngModelOptions]="{standalone: true}" placeholder="Property Name"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input type="textarea" [(ngModel)]="address"  [ngModelOptions]="{standalone: true}" placeholder="Address"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="sqft"  [ngModelOptions]="{standalone: true}" placeholder="Area of space in sqft"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input type="textarea" [(ngModel)]="permission"  [ngModelOptions]="{standalone: true}" placeholder="Permitted Uses"></ion-input>
+              </ion-item>
+            </ion-list>
+              <button ion-button  color="secondary" type="submit" block>
+                Join Us
+              </button>
+            </form>
+          </ion-card-content>
+    </ion-card>
+     </ion-content>
+  
+  
+  

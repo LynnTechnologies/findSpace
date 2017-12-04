@@ -127,8 +127,14 @@ export class LoginPage {
           this.storage.set('name', response[0].name);
           this.storage.set('email', response[0].email);
           this.storage.set('pic', response[0].pic);
-          this.event.publish('user:logged', response[0].email, Date.now());
-          this.enableAuthenticatedMenu();
+          this.event.publish('user:logged', response[0], Date.now());
+          if (response[0].accType == "SO"){
+            this.enableAuthenticatedMenuForOwner();
+          } else {
+            console.log(response[0]);
+            this.enableAuthenticatedMenu();
+          }
+          
           this.navCtrl.setRoot(HomePage);
          }
        }, error => {
@@ -147,6 +153,13 @@ export class LoginPage {
   enableAuthenticatedMenu() {
     this.menuCtrl.enable(true, 'authenticated');
     this.menuCtrl.enable(false, 'unauthenticated');
+    this.menuCtrl.enable(false, 'authenticatedOwner');
+  }
+
+  enableAuthenticatedMenuForOwner() {
+    this.menuCtrl.enable(true, 'authenticatedOwner');
+    this.menuCtrl.enable(false, 'unauthenticated');
+    this.menuCtrl.enable(false, 'authenticated');
   }
 
 }
