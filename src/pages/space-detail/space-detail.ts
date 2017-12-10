@@ -15,7 +15,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
   templateUrl: 'space-detail.html',
 })
 export class SpaceDetailPage {
-  space : any[];
+  private space : any[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public photoViewer: PhotoViewer) {
     this.space = JSON.parse(navParams.get('space'));
   }

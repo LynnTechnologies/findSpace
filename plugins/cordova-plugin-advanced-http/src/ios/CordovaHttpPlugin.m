@@ -11,15 +11,18 @@
 - (NSNumber*)getStatusCode:(NSError*) error;
 - (NSMutableDictionary*)copyHeaderFields:(NSDictionary*)headerFields;
 - (void)setTimeout:(NSTimeInterval)timeout forManager:(AFHTTPSessionManager*)manager;
+- (void)setRedirect:(AFHTTPSessionManager*)manager;
 
 @end
 
 @implementation CordovaHttpPlugin {
     AFSecurityPolicy *securityPolicy;
+    bool redirect;
 }
 
 - (void)pluginInitialize {
     securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    redirect = true;
 }
 
 - (void)setRequestSerializer:(NSString*)serializerName forManager:(AFHTTPSessionManager*)manager {
@@ -36,8 +39,19 @@
     }];
 }
 
+- (void)setRedirect:(AFHTTPSessionManager*)manager {
+    [manager setTaskWillPerformHTTPRedirectionBlock:^NSURLRequest * _Nonnull(NSURLSession * _Nonnull session, NSURLSessionTask * _Nonnull task, NSURLResponse * _Nonnull response, NSURLRequest * _Nonnull request) {
+        if (redirect) {
+            return request;
+        } else {
+            return nil;
+        }
+    }];
+}
+
 - (void)handleSuccess:(NSMutableDictionary*)dictionary withResponse:(NSHTTPURLResponse*)response andData:(id)data {
     if (response != nil) {
+        [dictionary setValue:response.URL.absoluteString forKey:@"url"];
         [dictionary setObject:[NSNumber numberWithInt:response.statusCode] forKey:@"status"];
         [dictionary setObject:[self copyHeaderFields:response.allHeaderFields] forKey:@"headers"];
     }
@@ -49,6 +63,7 @@
 
 - (void)handleError:(NSMutableDictionary*)dictionary withResponse:(NSHTTPURLResponse*)response error:(NSError*)error {
     if (response != nil) {
+        [dictionary setValue:response.URL.absoluteString forKey:@"url"];
         [dictionary setObject:[NSNumber numberWithInt:response.statusCode] forKey:@"status"];
         [dictionary setObject:[self copyHeaderFields:response.allHeaderFields] forKey:@"headers"];
         [dictionary setObject:[[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding] forKey:@"error"];
@@ -95,6 +110,7 @@
 
 - (void)enableSSLPinning:(CDVInvokedUrlCommand*)command {
     bool enable = [[command.arguments objectAtIndex:0] boolValue];
+
     if (enable) {
         securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
     } else {
@@ -105,21 +121,22 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (void)acceptAllCerts:(CDVInvokedUrlCommand*)command {
+- (void)disableRedirect:(CDVInvokedUrlCommand*)command {
     CDVPluginResult* pluginResult = nil;
-    bool allow = [[command.arguments objectAtIndex:0] boolValue];
+    bool disable = [[command.arguments objectAtIndex:0] boolValue];
 
-    securityPolicy.allowInvalidCertificates = allow;
+    redirect = !disable;
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (void)validateDomainName:(CDVInvokedUrlCommand*)command {
+- (void)acceptAllCerts:(CDVInvokedUrlCommand*)command {
     CDVPluginResult* pluginResult = nil;
-    bool validate = [[command.arguments objectAtIndex:0] boolValue];
+    bool allow = [[command.arguments objectAtIndex:0] boolValue];
 
-    securityPolicy.validatesDomainName = validate;
+    securityPolicy.allowInvalidCertificates = allow;
+    securityPolicy.validatesDomainName = !allow;
 
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -138,6 +155,7 @@
     [self setRequestSerializer: serializerName forManager: manager];
     [self setRequestHeaders: headers forManager: manager];
     [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
     manager.responseSerializer = [TextResponseSerializer serializer];
@@ -169,6 +187,7 @@
     [self setRequestSerializer: @"default" forManager: manager];
     [self setRequestHeaders: headers forManager: manager];
     [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
 
@@ -201,10 +220,43 @@
     [self setRequestSerializer: serializerName forManager: manager];
     [self setRequestHeaders: headers forManager: manager];
     [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
     manager.responseSerializer = [TextResponseSerializer serializer];
     [manager PUT:url parameters:parameters success:^(NSURLSessionTask *task, id responseObject) {
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        [self handleSuccess:dictionary withResponse:(NSHTTPURLResponse*)task.response andData:responseObject];
+
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
+        [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    } failure:^(NSURLSessionTask *task, NSError *error) {
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        [self handleError:dictionary withResponse:(NSHTTPURLResponse*)task.response error:error];
+
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
+        [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
+- (void)patch:(CDVInvokedUrlCommand*)command {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.securityPolicy = securityPolicy;
+
+    NSString *url = [command.arguments objectAtIndex:0];
+    NSDictionary *parameters = [command.arguments objectAtIndex:1];
+    NSString *serializerName = [command.arguments objectAtIndex:2];
+    NSDictionary *headers = [command.arguments objectAtIndex:3];
+    NSTimeInterval timeoutInSeconds = [[command.arguments objectAtIndex:4] doubleValue];
+
+    [self setRequestSerializer: serializerName forManager: manager];
+    [self setRequestHeaders: headers forManager: manager];
+    [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
+
+    CordovaHttpPlugin* __weak weakSelf = self;
+    manager.responseSerializer = [TextResponseSerializer serializer];
+    [manager PATCH:url parameters:parameters success:^(NSURLSessionTask *task, id responseObject) {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         [self handleSuccess:dictionary withResponse:(NSHTTPURLResponse*)task.response andData:responseObject];
 
@@ -231,6 +283,7 @@
     [self setRequestSerializer: @"default" forManager: manager];
     [self setRequestHeaders: headers forManager: manager];
     [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
 
@@ -260,6 +313,7 @@
 
     [self setRequestHeaders: headers forManager: manager];
     [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
 
@@ -295,6 +349,7 @@
 
     [self setRequestHeaders: headers forManager: manager];
     [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
     manager.responseSerializer = [TextResponseSerializer serializer];
@@ -311,7 +366,7 @@
         }
     } progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-        [self handleSuccess:dictionary withResponse:(NSHTTPURLResponse*)task.response andData:nil];
+        [self handleSuccess:dictionary withResponse:(NSHTTPURLResponse*)task.response andData:responseObject];
 
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
         [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -337,6 +392,7 @@
 
     [self setRequestHeaders: headers forManager: manager];
     [self setTimeout:timeoutInSeconds forManager:manager];
+    [self setRedirect: manager];
 
     if ([filePath hasPrefix:@"file://"]) {
         filePath = [filePath substringFromIndex:7];

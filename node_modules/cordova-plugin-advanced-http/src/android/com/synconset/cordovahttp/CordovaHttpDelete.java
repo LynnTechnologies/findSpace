@@ -17,7 +17,7 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 class CordovaHttpDelete extends CordovaHttp implements Runnable {
-    public CordovaHttpDelete(String urlString, JSONObject data, JSONObject headers, CallbackContext callbackContext, int timeout) {
+    public CordovaHttpDelete(String urlString, Object data, JSONObject headers, int timeout, CallbackContext callbackContext) {
         super(urlString, data, headers, timeout, callbackContext);
     }
 
@@ -27,9 +27,11 @@ class CordovaHttpDelete extends CordovaHttp implements Runnable {
             HttpRequest request = HttpRequest.delete(this.getUrlString(), this.getParamsMap(), false);
 
             request.readTimeout(this.getRequestTimeout());
+            this.setupRedirect(request);
             this.setupSecurity(request);
             request.acceptCharset(CHARSET);
             request.headers(this.getHeadersMap());
+            request.uncompress(true);
 
             int code = request.code();
             String body = request.body(CHARSET);
@@ -55,8 +57,10 @@ class CordovaHttpDelete extends CordovaHttp implements Runnable {
             } else if (e.getCause() instanceof SSLHandshakeException) {
                 this.respondWithError("SSL handshake failed");
             } else {
-                this.respondWithError("There was an error with the request");
+                this.respondWithError("There was an error with the request: " + e.getMessage());
             }
+        } catch (Exception e) {
+          this.respondWithError(-1, e.getMessage());
         }
     }
 }

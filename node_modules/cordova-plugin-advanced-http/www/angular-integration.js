@@ -38,11 +38,11 @@ function registerService(http) {
             useBasicAuth: function (username, password) {
                 return http.useBasicAuth(username, password);
             },
-            setHeader: function (header, value) {
-                return http.setHeader(header, value);
+            setHeader: function (host, header, value) {
+                return http.setHeader(host, header, value);
             },
             setDataSerializer: function (serializer) {
-                return http.setParamSerializer(serializer);
+                return http.setDataSerializer(serializer);
             },
             clearCookies: function () {
                 return http.clearCookies();
@@ -58,6 +58,9 @@ function registerService(http) {
             },
             acceptAllCerts: function (allow) {
                 return makePromise(http.acceptAllCerts, [allow]);
+            },
+            disableRedirect: function(disable) {
+                return makePromise(http.disableRedirect, [disable]);
             },
             validateDomainName: function (validate) {
                 return makePromise(http.validateDomainName, [validate]);

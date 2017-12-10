@@ -1,5 +1,59 @@
 # Changelog
 
+## v1.9.0
+
+- Feature #44: "getCookieString" method is exposed
+- Feature #43: added support for content type "application/javascript" on iOS (thanks wh33ler)
+- Feature #46: "setCookie" allows adding custom cookies
+
+## v1.8.1
+
+- Fixed #27: "uploadFile" method doesn't return data object on iOS (thanks Faisalali23 and laiyinjie)
+- Fixed #40: generic error codes are different on Android and iOS
+
+## v1.8.0
+
+- Feature #33: response object contains response url
+
+## v1.7.1
+
+- Fixed #36: setting basic authentication not working correctly (thanks jkfb)
+- Fixed #35: Android headers are not normalized (not returned in lowercase)
+- Fixed #26: JSON request with array data is not working on Android (JSON error)
+
+## v1.7.0
+
+- Feature #24: "setHeader" allows configuring headers for specified host
+
+## v1.6.2
+
+- Change #29: removed "validateDomainName" (see info notice)
+- Fixed #31: request fails throwing error on erroneous cookies
+- Fixed #28: added support for content type "application/hal+json" on iOS (thanks ryandegruyter)
+
+#### Important information
+We've decided to remove the `validateDomainName()` method, because people were complaining that `acceptAllCerts(true)` is not behaving as expected. And also it's not a good idea to disable domain name validation while using valid certs, because it pretends having a secure connection, but it isn't.
+
+You should either use valid certs with domain name validation enabled (safe for production use) or accept any certs without domain name validation (only for private dev environments). I strongly discourage using fake certs in public networks.
+
+Therefore we are disabling domain name validation automatically, when you set `acceptAllCerts(true)`. So if you were using `validateDomainName()` function, you need to remove this function call for v1.6.2+.
+
+## v1.6.1
+
+- Fixed #23: PATCH method broken on android
+
+## v1.6.0
+
+- Feature #18: implemented PATCH method (thanks akhatri for android implementation)
+- Feature #21: added redirection control (thanks to notsyncing and kesozjura)
+- Fixed #16: cordova tries to run build script during plugin install
+
+## v1.5.10
+
+- Fixed #10: fix gzip decompression when request header accepts gzip compression (thanks to DayBr3ak)
+- Fixed #13: fix angular integration for `setDataSerializer` (thanks to RangerRick)
+- Added some missing documentation (thanks to RangerRick)
+
 ## v1.5.9
 
 - Fixed case-sensitive folder name of Android source files

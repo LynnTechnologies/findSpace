@@ -2,50 +2,50 @@
   "_args": [
     [
       {
-        "raw": "com-sarriaroman-photoviewer",
+        "raw": "com-sarriaroman-photoviewer@^1.1.10",
         "scope": null,
         "escapedName": "com-sarriaroman-photoviewer",
         "name": "com-sarriaroman-photoviewer",
-        "rawSpec": "",
-        "spec": "latest",
-        "type": "tag"
+        "rawSpec": "^1.1.10",
+        "spec": ">=1.1.10 <2.0.0",
+        "type": "range"
       },
-      "L:\\Ionic demo\\findSpace\\node_modules"
+      "L:\\Ionic demo\\SpaceFinder-Git\\findSpace (Fork)"
     ]
   ],
-  "_from": "com-sarriaroman-photoviewer@latest",
-  "_id": "com-sarriaroman-photoviewer@1.1.10",
+  "_from": "com-sarriaroman-photoviewer@>=1.1.10 <2.0.0",
+  "_id": "com-sarriaroman-photoviewer@1.1.11",
   "_inCache": true,
   "_location": "/com-sarriaroman-photoviewer",
-  "_nodeVersion": "6.9.1",
+  "_nodeVersion": "8.8.0",
   "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/com-sarriaroman-photoviewer-1.1.10.tgz_1481173313353_0.7134814336895943"
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/com-sarriaroman-photoviewer-1.1.11.tgz_1509466921354_0.6171205805148929"
   },
   "_npmUser": {
     "name": "sarriaroman",
     "email": "agustin478@gmail.com"
   },
-  "_npmVersion": "3.10.8",
+  "_npmVersion": "5.4.2",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "com-sarriaroman-photoviewer",
+    "raw": "com-sarriaroman-photoviewer@^1.1.10",
     "scope": null,
     "escapedName": "com-sarriaroman-photoviewer",
     "name": "com-sarriaroman-photoviewer",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
+    "rawSpec": "^1.1.10",
+    "spec": ">=1.1.10 <2.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/com-sarriaroman-photoviewer/-/com-sarriaroman-photoviewer-1.1.10.tgz",
-  "_shasum": "e18f1535751fe105ae180c4fc5a164120471900d",
+  "_resolved": "https://registry.npmjs.org/com-sarriaroman-photoviewer/-/com-sarriaroman-photoviewer-1.1.11.tgz",
+  "_shasum": "29304b15c22ad1214fa8049c3195cd0fb378737b",
   "_shrinkwrap": null,
-  "_spec": "com-sarriaroman-photoviewer",
-  "_where": "L:\\Ionic demo\\findSpace\\node_modules",
+  "_spec": "com-sarriaroman-photoviewer@^1.1.10",
+  "_where": "L:\\Ionic demo\\SpaceFinder-Git\\findSpace (Fork)",
   "author": {
     "name": "Román A. Sarria"
   },
@@ -64,8 +64,9 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "e18f1535751fe105ae180c4fc5a164120471900d",
-    "tarball": "https://registry.npmjs.org/com-sarriaroman-photoviewer/-/com-sarriaroman-photoviewer-1.1.10.tgz"
+    "integrity": "sha512-whkbi6oWA+/atDS4YoxmqH1oOUB9Qt+CFih9RAgj9G1i+ytoBr1ik6TyPm1GsnIhnOS4g6Aa2RKDaLld5EC3Mg==",
+    "shasum": "29304b15c22ad1214fa8049c3195cd0fb378737b",
+    "tarball": "https://registry.npmjs.org/com-sarriaroman-photoviewer/-/com-sarriaroman-photoviewer-1.1.11.tgz"
   },
   "engines": [
     {
@@ -81,7 +82,7 @@
       "version": ">=4.2.0"
     }
   ],
-  "gitHead": "ce34fc7982b465010f2b5f5124d793d1745d95f8",
+  "gitHead": "e88e2dc55c6cd22c9a139e6ad19b199930ff6021",
   "homepage": "https://github.com/sarriaroman/photoviewer#readme",
   "keywords": [
     "cordova",
@@ -104,6 +105,5 @@
     "type": "git",
     "url": "git+https://github.com/sarriaroman/photoviewer.git"
   },
-  "scripts": {},
-  "version": "1.1.10"
+  "version": "1.1.11"
 }

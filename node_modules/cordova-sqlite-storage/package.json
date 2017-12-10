@@ -2,25 +2,25 @@
   "_args": [
     [
       {
-        "raw": "cordova-sqlite-storage",
+        "raw": "cordova-sqlite-storage@^2.0.4",
         "scope": null,
         "escapedName": "cordova-sqlite-storage",
         "name": "cordova-sqlite-storage",
-        "rawSpec": "",
-        "spec": "latest",
-        "type": "tag"
+        "rawSpec": "^2.0.4",
+        "spec": ">=2.0.4 <3.0.0",
+        "type": "range"
       },
-      "L:\\Ionic demo\\findSpace\\node_modules"
+      "L:\\Ionic demo\\SpaceFinder-Git\\findSpace (Fork)"
     ]
   ],
-  "_from": "cordova-sqlite-storage@latest",
-  "_id": "cordova-sqlite-storage@2.0.4",
+  "_from": "cordova-sqlite-storage@>=2.0.4 <3.0.0",
+  "_id": "cordova-sqlite-storage@2.1.2",
   "_inCache": true,
   "_location": "/cordova-sqlite-storage",
-  "_nodeVersion": "6.10.2",
+  "_nodeVersion": "6.11.5",
   "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/cordova-sqlite-storage-2.0.4.tgz_1493862870442_0.8638168727047741"
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/cordova-sqlite-storage-2.1.2.tgz_1510550071835_0.12552570877596736"
   },
   "_npmUser": {
     "name": "brodybits",
@@ -29,23 +29,23 @@
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "cordova-sqlite-storage",
+    "raw": "cordova-sqlite-storage@^2.0.4",
     "scope": null,
     "escapedName": "cordova-sqlite-storage",
     "name": "cordova-sqlite-storage",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
+    "rawSpec": "^2.0.4",
+    "spec": ">=2.0.4 <3.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-2.0.4.tgz",
-  "_shasum": "8b5ce65c63b46b0415ca7012cc57bf2711b20371",
+  "_resolved": "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-2.1.2.tgz",
+  "_shasum": "fb3ccc842d088fde5513b7d3160a88319fb72ea4",
   "_shrinkwrap": null,
-  "_spec": "cordova-sqlite-storage",
-  "_where": "L:\\Ionic demo\\findSpace\\node_modules",
+  "_spec": "cordova-sqlite-storage@^2.0.4",
+  "_where": "L:\\Ionic demo\\SpaceFinder-Git\\findSpace (Fork)",
   "author": {
     "name": "various"
   },
@@ -57,6 +57,7 @@
     "platforms": [
       "android",
       "ios",
+      "osx",
       "windows"
     ]
   },
@@ -69,10 +70,10 @@
   },
   "directories": {},
   "dist": {
-    "shasum": "8b5ce65c63b46b0415ca7012cc57bf2711b20371",
-    "tarball": "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-2.0.4.tgz"
+    "shasum": "fb3ccc842d088fde5513b7d3160a88319fb72ea4",
+    "tarball": "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-2.1.2.tgz"
   },
-  "gitHead": "952e92b1ebff98c9a975d6c9b56a90b79376618a",
+  "gitHead": "7bd451f03b1558c181fac5eb7e4df88a9dc97c9d",
   "homepage": "https://github.com/litehelpers/Cordova-sqlite-storage",
   "keywords": [
     "sqlite",
@@ -98,5 +99,5 @@
   "scripts": {
     "start": "node scripts/prepareSpec.js"
   },
-  "version": "2.0.4"
+  "version": "2.1.2"
 }

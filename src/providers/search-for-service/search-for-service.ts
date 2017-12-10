@@ -17,7 +17,7 @@ export class SearchForServiceProvider {
   constructor(private http:Http){
       this.baseUrl = 'http://gateforyou.16mb.com/searchSpace.php';
      // this.baseUrl = 'http://localhost/api/feed';
-     // this.baseUrl = 'http://localhost/sf/searchSpace.php';
+    //  this.baseUrl = 'http://localhost/sf/searchSpace.php';
   }
 
   searchSpace(data) {
