@@ -33,26 +33,7 @@ export class MyApp {
       { title: 'List a space', component: 'SignupPage' },
       { title: 'Login', component: LoginPage }
     ];
-
-    this.authenticatedOwner = [
-      { title: 'Home', component: HomePage },
-      { title: 'Add Space', component: " " },
-      { title: 'View Space', component: " " },
-      { title: 'Bookings', component: " " },
-      { title: 'Earings', component: " " },
-      { title: 'My Account', component: " " },
-      
-    ];
-
-    this.authenticatedPages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Map', component: " " },
-      { title: 'Referals', component: " " },
-      { title: 'Rewards', component: " " },
-      { title: 'My Account', component: " " },
-      
-    ];
-
+    this.setMenu();
     events.subscribe('user:logged', (user, time) => {
       console.log('Welcome', user, 'at', time);
      
@@ -79,6 +60,27 @@ export class MyApp {
     });
   }
 
+  private setMenu () {
+    this.authenticatedOwner = [
+      { title: 'Home', component: HomePage },
+      { title: 'Add Space', component: " " },
+      { title: 'View Space', component: " " },
+      { title: 'Bookings', component: " " },
+      { title: 'Earings', component: " " },
+      { title: 'My Account', component: " " },
+      
+    ];
+
+    this.authenticatedPages = [
+      { title: 'Home', component: HomePage },
+      { title: 'Map', component: " " },
+      { title: 'Referals', component: " " },
+      { title: 'Rewards', component: " " },
+      { title: 'My Account', component: " " },
+      
+    ];
+  }
+
   openPage(page) { 
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
@@ -91,6 +93,7 @@ export class MyApp {
       this.menuCtrl.enable(false, 'authenticated');
       this.menuCtrl.enable(true, 'unauthenticated');
       this.menuCtrl.enable(false, 'authenticatedOwner');
+      this.setMenu();
       this.nav.setRoot(HomePage);
     }
   }
