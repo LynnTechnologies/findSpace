@@ -132,6 +132,7 @@ export class AuthServiceProvider {
             });
             alert.present();
            } else {
+            this.storage.set('userid', response[0].user_id);
             this.storage.set('name', response[0].name);
             this.storage.set('email', response[0].email);
             this.storage.set('pic', response[0].pic);

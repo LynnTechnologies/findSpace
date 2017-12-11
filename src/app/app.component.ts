@@ -63,7 +63,7 @@ export class MyApp {
   private setMenu () {
     this.authenticatedOwner = [
       { title: 'Home', component: HomePage },
-      { title: 'Add Space', component: " " },
+      { title: 'Add Space', component: 'CreatespacePage' },
       { title: 'View Space', component: " " },
       { title: 'Bookings', component: " " },
       { title: 'Earings', component: " " },
