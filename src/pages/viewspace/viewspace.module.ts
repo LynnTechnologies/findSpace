@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ViewImagePage } from './view-image';
+import { ViewspacePage } from './viewspace';
 
 @NgModule({
   declarations: [
-    ViewImagePage,
+    ViewspacePage
   ],
   imports: [
-    IonicPageModule.forChild(ViewImagePage),
+    IonicPageModule.forChild(ViewspacePage)
   ],
 })
-export class ViewImagePageModule {}
+export class SplashPageModule {}

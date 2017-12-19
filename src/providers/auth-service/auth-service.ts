@@ -33,7 +33,7 @@ export class AuthServiceProvider {
      this.signupURL = 'http://gateforyou.16mb.com/signup.php';
      this.loginURL = 'http://gateforyou.16mb.com/login.php';
 
-    //this.signupURL = 'http:/localhost/sf/signup.php';
+   // this.signupURL = 'http:/localhost/sf/signup.php';
     //this.loginURL = 'http:/localhost/sf/login.php';
   }
 

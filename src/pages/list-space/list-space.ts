@@ -29,7 +29,8 @@ export class ListSpacePage {
   }
 
   backButtonClick() {
-     this.navCtrl.pop();
+    console.log("back button click");
+     this.navCtrl.setRoot('HomePage');
   }
   loadSpaceDetails(space) {
     console.log('ionViewDidLoad loadSpaceDetails'+space);

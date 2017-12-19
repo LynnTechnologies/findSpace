@@ -25,9 +25,18 @@
               <ion-item>
                 <ion-input type="textarea" [(ngModel)]="permission"  [ngModelOptions]="{standalone: true}" placeholder="Permitted Uses"></ion-input>
               </ion-item>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="spaceType"  [ngModelOptions]="{standalone: true}" placeholder="Space Type"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="location"  [ngModelOptions]="{standalone: true}" placeholder="Location"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="imageURL"  [ngModelOptions]="{standalone: true}" placeholder="Image URL"></ion-input>
+              </ion-item>
             </ion-list>
               <button ion-button  color="secondary" type="submit" block>
-                Join Us
+                Save
               </button>
             </form>
           </ion-card-content>

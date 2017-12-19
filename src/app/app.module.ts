@@ -13,7 +13,6 @@ import { SpaceForServiceProvider } from '../providers/space-for-service/space-fo
 import { SearchForServiceProvider } from '../providers/search-for-service/search-for-service';
 import { ListSpacePage } from '../pages/list-space/list-space';
 import { SpaceDetailPage } from '../pages/space-detail/space-detail';
-import { ViewImagePage } from '../pages/view-image/view-image';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
 
@@ -47,7 +46,6 @@ firebase.initializeApp({
     SplashPage,
     ListSpacePage,
     SpaceDetailPage,
-    ViewImagePage,
     MapPage
   ],
   imports: [
@@ -65,7 +63,6 @@ firebase.initializeApp({
     SplashPage,
     ListSpacePage,
     SpaceDetailPage,
-    ViewImagePage,
     MapPage
   ],
   providers: [

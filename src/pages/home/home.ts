@@ -64,7 +64,7 @@ export class HomePage {
 
       //.subscribe(data => this.processList(data));
       let data = { selectedSpace : this.userData.selectedSpace,
-                  rentBy : this.userData.rentBy};
+                  rentBy : this.userData.rentBy, ownerid : "" };
       
       this.searchForServiceProvider.searchSpace(data).then((result) => {
         loading.dismiss();

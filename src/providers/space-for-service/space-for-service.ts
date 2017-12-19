@@ -15,7 +15,7 @@ export class SpaceForServiceProvider {
   baseUrl:string;
   baseUrlForLike:string;
   constructor(private http:Http){
-     this.baseUrl = 'http://gateforyou.16mb.com/user.php';
+      this.baseUrl = 'http://gateforyou.16mb.com/user.php';
      // this.baseUrlForLike = 'http://gateforyou.16mb.com/updateLikeForSpace.php';
      // this.baseUrl = 'http://localhost/sf/user.php';
   }

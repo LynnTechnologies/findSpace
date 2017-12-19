@@ -64,7 +64,7 @@ export class MyApp {
     this.authenticatedOwner = [
       { title: 'Home', component: HomePage },
       { title: 'Add Space', component: 'CreatespacePage' },
-      { title: 'View Space', component: " " },
+      { title: 'View Space', component: 'ViewspacePage' },
       { title: 'Bookings', component: " " },
       { title: 'Earings', component: " " },
       { title: 'My Account', component: " " },

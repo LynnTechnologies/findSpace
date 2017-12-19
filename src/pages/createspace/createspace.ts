@@ -32,10 +32,13 @@ export class CreatespacePage {
   private address : any;
   private sqft : any;
   private permission : any;
-
+  private spaceType : any;
+  private location : any;
+  private imageURL : any;
   createSpace() {
     if ( this.propertyName == null || this.address == null || this.sqft == null 
-      || this.permission == null ) {
+      || this.permission == null || this.spaceType == null || this.location == null 
+      || this.imageURL == null ) {
       let alert = this.alertCtrl.create({
         title: 'Invalid',
         subTitle: 'You have missed to enter some data... Please enter all values',
@@ -49,7 +52,8 @@ export class CreatespacePage {
         ownerid = val;
         console.log("ownerid: " +ownerid);
         data = { propertyName : this.propertyName , address : this.address ,
-          sqft : this.sqft , permission : this.permission , owner_id : ownerid };
+          sqft : this.sqft , permission : this.permission , owner_id : ownerid,
+        spaceType : this.spaceType, location : this.location, imageURL : this.imageURL };
          new Promise((resolve,reject) => {
            let headers = new Headers({
              'Content-Type': 'application/x-www-form-urlencoded'
@@ -82,6 +86,9 @@ export class CreatespacePage {
                this.address = null;
                this.sqft = null;
                this.permission = null;
+               this.spaceType = null;
+               this.location = null;
+               this.imageURL = null;
               }
             }, error => {
                let alert = this.alertCtrl.create({
